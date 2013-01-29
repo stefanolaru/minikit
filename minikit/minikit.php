@@ -1,6 +1,7 @@
 <?php 
 /*
  * MiniKit is maintained by Stefan Olaru
+ * Inspired by Bones https://github.com/eddiemachado/bones
  * - www.stefanolaru.com -
  */
 

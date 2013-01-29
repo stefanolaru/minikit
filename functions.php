@@ -11,4 +11,5 @@ add_image_size('300x200', 300, 200, true);
 /* require minikit shortcodes */
 require_once('minikit/shortcodes.php');
 
+
 ?>
