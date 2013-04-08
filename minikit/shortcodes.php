@@ -36,8 +36,9 @@ add_filter( 'the_content', 'shortcode_unautop',100 );
 
 /* write email address using javascript*/
 function email_antispam($atts,$content=null) {
+	$link = '<a'.(!empty($atts['class'])?' class="'.$atts['class'].'"':'').' href="mailto:'.do_shortcode($content).'">'.do_shortcode($content).'</a>';
 	$html = '<script type="text/javascript">';
-	$html .= 'document.write(\'<a'.(!empty($atts['class'])?' class="'.$atts['class'].'"':'').' href="mailto:'.do_shortcode($content).'">'.do_shortcode($content).'</a>\');';
+	$html .= 'document.write(\''.$link.'\');';
 	$html .= '</script>';
 	return $html;
 }
