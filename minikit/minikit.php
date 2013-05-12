@@ -32,6 +32,7 @@ function init_minikit() {
 }
 
 function minikit_head_cleanup() {
+	global $wp_widget_factory; 
 	// EditURI link
 	remove_action( 'wp_head', 'rsd_link' );
 	// windows live writer
@@ -46,6 +47,8 @@ function minikit_head_cleanup() {
 	remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0 );
 	// WP version
 	remove_action( 'wp_head', 'wp_generator');
+	// remove recent comments style
+	remove_action( 'wp_head', array( $wp_widget_factory->widgets['WP_Widget_Recent_Comments'], 'recent_comments_style' ) );
 	// remove WP version from css
 	add_filter('style_loader_src', 'minikit_remove_wp_ver_css_js', 9999);
 	// remove Wp version from scripts
