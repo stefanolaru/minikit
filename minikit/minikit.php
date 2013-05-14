@@ -126,6 +126,18 @@ function minikit_excerpt_more($more) {
 	return '...  <a href="'. get_permalink($post->ID) . '" title="Read '.get_the_title($post->ID).'">Read more &raquo;</a>';
 }
 
+function changeWPURL($old_url,$new_url) {
+	// useful when you need to migrate the wordpress install to another URL
+	// makes the needed DB changes
+	global $wpdb;
+	// update post guid
+	$wpdb->query("UPDATE ".$wpdb->posts." SET `guid`=REPLACE(`guid`,'".$old_url."','".$new_url."')");
+	// update post content
+	$wpdb->query("UPDATE ".$wpdb->posts." SET `post_content`=REPLACE(`post_content`,'".$old_url."','".$new_url."')");
+	// update options
+	$wpdb->query("UPDATE ".$wpdb->options." SET `option_value`=REPLACE(`option_value`,'".$old_url."','".$new_url."')");
+}
+
 // get current URL
 function currentURL() {
 	 $pageURL = 'http';
