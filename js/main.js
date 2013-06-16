@@ -1,8 +1,8 @@
 /* start main.js */
 
-jQuery.noConflict();
+var j = jQuery.noConflict();
 
-$(document).ready(function($){
+j(document).ready(function($){
 
 });
 
