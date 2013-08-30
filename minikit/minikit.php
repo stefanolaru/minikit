@@ -151,4 +151,32 @@ function currentURL() {
 	 return $pageURL;
 }
 
+/* add login logo */
+function minikit_login_logo() {
+	if(file_exists(TEMPLATEPATH.'/img/logo.png')) {
+		echo '<style type="text/css">
+	        body.login div#login h1 a {
+	            background-image: url('.get_template_directory_uri().'/img/logo.png);
+	            padding-bottom: 30px;
+	            background-size: auto;
+	        }
+	    </style>';
+    }
+}
+add_action('login_enqueue_scripts', 'minikit_login_logo');
+
+/* change login logo url */
+function minikit_login_logo_url() {
+    return get_bloginfo( 'url' );
+}
+add_filter('login_headerurl', 'minikit_login_logo_url');
+
+
+/* change login logo url title */
+function minikit_login_logo_url_title() {
+    return get_bloginfo('name');
+}
+add_filter('login_headertitle', 'minikit_login_logo_url_title');
+
+
 ?>
