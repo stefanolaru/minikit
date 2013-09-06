@@ -73,7 +73,7 @@ function minikit_register_js_and_css() {
 	
 		// register jquery, modernizr & main.js
 		wp_register_script('modernizr', get_template_directory_uri(). '/js/vendor/modernizr-2.6.2.min.js', array(), null, false);
-		wp_register_script('jquery', get_template_directory_uri(). '/js/vendor/jquery-1.8.3.min.js', array(),null, true);
+		wp_register_script('jquery', get_template_directory_uri(). '/js/vendor/jquery-1.9.1.min.js', array(),null, true);
 		wp_register_script('main', get_template_directory_uri(). '/js/main.js', array(), null, true);
 
 		// enque scripts		
