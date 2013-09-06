@@ -68,6 +68,9 @@ function minikit_remove_wp_ver_css_js( $src ) {
 
 function minikit_register_js_and_css() {
 	if(!is_admin()) {
+		// deregister wp jquery
+		wp_deregister_script('jquery');
+	
 		// register jquery, modernizr & main.js
 		wp_register_script('modernizr', get_template_directory_uri(). '/js/vendor/modernizr-2.6.2.min.js', array(), null, false);
 		wp_register_script('jquery', get_template_directory_uri(). '/js/vendor/jquery-1.8.3.min.js', array(),null, true);
