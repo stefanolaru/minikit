@@ -21,3 +21,11 @@
 		<?php wp_head(); ?>
 	</head>
 	<body <?php body_class(); ?>>
+	
+		<!--HEADER-->
+		<header>
+			
+		</header>
+		
+		<!--MAIN-->
+		<div id="main" role="main">
