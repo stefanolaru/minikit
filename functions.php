@@ -5,6 +5,9 @@ require_once('minikit/minikit.php');
 /* hide admin bar */
 add_filter('show_admin_bar', '__return_false');
 
+/* add post thumbnails theme support */
+add_theme_support('post-thumbnails');
+
 /* set a primary crop size */
 add_image_size('300x200', 300, 200, true);
 
