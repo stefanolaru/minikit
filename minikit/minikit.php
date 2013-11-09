@@ -4,6 +4,7 @@
  * Inspired by Bones https://github.com/eddiemachado/bones
  * - www.stefanolaru.com -
  */
+session_start(); 
 
 // debug function
 function debug($s) {
@@ -181,5 +182,110 @@ function minikit_login_logo_url_title() {
 }
 add_filter('login_headertitle', 'minikit_login_logo_url_title');
 
+/* encryption stuff */
+
+function safe_b64encode($string) {
+	$data = base64_encode($string);
+	$data = str_replace(array('+', '/', '='), array('-', '_', ''), $data);
+	return $data;
+}
+
+function safe_b64decode($string) {
+	$data = str_replace(array('-', '_'), array('+', '/'), $string);
+	$mod4 = strlen($data) % 4;
+	if ($mod4) {
+		$data .= substr('====', $mod4);
+	}
+	return base64_decode($data);
+}
+
+function encrypt($string, $key) {
+	return safe_b64encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($key), $string, MCRYPT_MODE_CBC, md5(md5($key))));
+}
+
+function decrypt($string, $key) {
+	return rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($key), safe_b64decode($string), MCRYPT_MODE_CBC, md5(md5($key))), "\0");
+}
+
+/* define encryption key */ 
+define('ENCRYPTION_KEY', get_option('admin_email'));
+
+/* Contact Form */
+
+class MinikitContact {
+	// errors
+	public $errors = array();
+	public $is_spam = false;
+	public $to;
+	public $subject;
+	public $success;
+	public $atts = array();
+	
+	function __construct() {
+		// validate form
+		$this->validate();
+		
+		// check validation errors errors
+		if(!empty($this->errors)) {
+			// set errors session
+			$_SESSION['mk-validation-errors'] = $this->errors;
+			
+			// stop execution
+			return false;
+		}
+		
+		// get attributes
+		if(!empty($_POST['mk-atts'])) {
+			$this->atts = json_decode(decrypt($_POST['mk-atts'],ENCRYPTION_KEY), true);
+		}
+		
+		// fill recipient with admin email if no email provided
+		$this->to = !empty($this->atts['to'])?$this->atts['to']:get_option('admin_email');
+		
+		// fill subject with default message
+		$this->subject = !empty($this->atts['subject'])?$this->atts['subject']:'Message from '.get_option('blogname');
+		
+		// fill success url
+		$this->success = !empty($this->atts['success'])?$this->atts['success']:currentURL();
+		
+		// send email
+		$this->send_email();
+	}
+	
+	function validate() {
+		// check name
+		if(empty($_POST['mk-name'])) {
+			$this->errors['mk-name'] = 'Please enter your name';
+		}
+		// check email
+		if(!filter_var($_POST['mk-email'], FILTER_VALIDATE_EMAIL)) {
+			$this->errors['mk-email'] = 'Please enter a valid email address';
+		}
+		// check message
+		if(empty($_POST['mk-message'])) {
+			$this->errors['mk-message'] = 'Please fill the message field';
+		}
+		// check spam bait field, if field is SPAM
+		if(!empty($_POST['url'])) {
+			$this->is_spam = true;
+		}
+	}
+	
+	function send_email() {
+		if(!$this->is_spam) {
+			$content = "From: ".$_POST['mk-name']."\r\nEmail: ".$_POST['mk-email']."\r\n\r\n".$_POST['mk-message'];
+			$headers = 'From: ' . $_POST['mk-name'] . ' <' . $_POST['mk-email'] . '>' . "\r\n" . 'Reply-To: ' . $_POST['mk-email'];
+			// send email
+			mail($this->to, $this->subject, $content, $headers);
+		}
+		// redirect
+		header('Location: '.$this->success);
+		
+	}
+}
+
+if(isset($_POST['mk-contact'])) {
+	new MinikitContact();
+}
 
 ?>
