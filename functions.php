@@ -28,4 +28,7 @@ register_sidebar(array(
 /* load basic widgets */
 // require_once('minikit/widgets/minikit-image-widget.php');
 
+/* load basic theme admin */
+require_once('minikit/admin/theme-options.php');
+
 ?>
