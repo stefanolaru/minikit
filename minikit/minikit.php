@@ -140,6 +140,8 @@ function changeWPURL($old_url,$new_url) {
 	$wpdb->query("UPDATE ".$wpdb->posts." SET `post_content`=REPLACE(`post_content`,'".$old_url."','".$new_url."')");
 	// update options
 	$wpdb->query("UPDATE ".$wpdb->options." SET `option_value`=REPLACE(`option_value`,'".$old_url."','".$new_url."')");
+	// update postmeta
+	$wpdb->query("UPDATE ".$wpdb->postmeta." SET `meta_value`=REPLACE(`meta_value`,'".$old_url."','".$new_url."')");
 }
 
 // get current URL
