@@ -58,7 +58,7 @@ class minikit_image_widget extends WP_Widget {
 		
 		?>
 			<?php if(!empty($instance['link'])): ?>
-				<a href="<?php echo $instance['link']; ?>"<?php if($instance['link_text']) echo ' title="'.$instance['link_text'].'"'; ?>>
+				<a href="<?php echo $instance['link']; ?>"<?php if($instance['link_text']) echo ' title="'.strip_tags($instance['link_text']).'"'; ?>>
 			<?php endif; ?>
 				<?php echo wp_get_attachment_image($instance['image_id'], $instance['image_size']); ?>
 				<?php if($instance['link_text']) echo '<span>'.$instance['link_text'].'</span>'; ?>

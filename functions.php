@@ -14,6 +14,18 @@ add_image_size('300x200', 300, 200, true);
 /* require minikit shortcodes */
 require_once('minikit/shortcodes.php');
 
+/* remove admin menus - we rarely need everything */
+function remove_menus () {
+	global $menu;
+	$restricted = array(__('Dashboard'), __('Media'), __('Links'), __('Comments'));
+	end ($menu);
+	while (prev($menu)){
+		$value = explode(' ',$menu[key($menu)][0]);
+		if(in_array($value[0] != NULL?$value[0]:"" , $restricted)){unset($menu[key($menu)]);}
+	}
+}
+add_action('admin_menu', 'remove_menus');
+
 /* register sidebars */
 register_sidebar(array(
 	'name' => 'Sidebar',
