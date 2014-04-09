@@ -163,8 +163,9 @@ function minikit_login_logo() {
 		echo '<style type="text/css">
 	        body.login div#login h1 a {
 	            background-image: url('.get_template_directory_uri().'/img/logo.png);
-	            padding-bottom: 30px;
+	            padding-bottom: 0;
 	            background-size: auto;
+	            width: auto;
 	        }
 	    </style>';
     }
