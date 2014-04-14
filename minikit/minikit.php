@@ -185,6 +185,14 @@ function minikit_login_logo_url_title() {
 }
 add_filter('login_headertitle', 'minikit_login_logo_url_title');
 
+/* remove wp admin bar logo */
+function minikit_logo_admin_bar_remove() {
+	global $wp_admin_bar;
+	$wp_admin_bar->remove_menu('wp-logo');
+}
+add_action('wp_before_admin_bar_render', 'minikit_logo_admin_bar_remove', 0);
+
+
 /* encryption stuff */
 
 function safe_b64encode($string) {
