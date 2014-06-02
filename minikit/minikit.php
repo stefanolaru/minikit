@@ -145,16 +145,10 @@ function changeWPURL($old_url,$new_url) {
 }
 
 // get current URL
-function currentURL() {
-	 $pageURL = 'http';
-	 if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
-	 $pageURL .= "://";
-	 if ($_SERVER["SERVER_PORT"] != "80") {
-	  $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
-	 } else {
-	  $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
-	 }
-	 return $pageURL;
+function currentURL($add_qs = array()) {
+	global $wp;
+	$current_url = add_query_arg(array_merge($wp->query_vars, $add_qs), home_url($wp->request));
+	return $current_url;
 }
 
 /* add login logo */
@@ -191,6 +185,18 @@ function minikit_logo_admin_bar_remove() {
 	$wp_admin_bar->remove_menu('wp-logo');
 }
 add_action('wp_before_admin_bar_render', 'minikit_logo_admin_bar_remove', 0);
+
+// Create the function to use in the action hook
+function minikit_remove_dashboard_widgets() {
+	global $wp_meta_boxes;
+
+	// Remove the quickpress widget
+	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_quick_press']);
+
+	// Remove the incomming links widget
+	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_incoming_links']);
+} 
+add_action('wp_dashboard_setup', 'minikit_remove_dashboard_widgets' );
 
 
 /* encryption stuff */

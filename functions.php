@@ -14,6 +14,24 @@ add_image_size('300x200', 300, 200, true);
 /* require minikit shortcodes */
 require_once('minikit/shortcodes.php');
 
+// enqueue extra scripts and styles
+add_action('wp_enqueue_scripts', 'minikit_register_extra_js_and_css', 998);
+
+function minikit_register_extra_js_and_css() {
+	global $wp_styles;
+	// registered css
+//	wp_deregister_style('normalize');
+//	wp_deregister_style('style');
+	
+	// register extra css
+	wp_enqueue_style('foundation', get_template_directory_uri().'/css/foundation.min.css', array('normalize'), '', 'all');
+	
+	// registered scripts
+//	wp_deregister_script('modernizr');
+//	wp_deregister_script('main');
+	
+}
+
 /* remove admin menus - we rarely need everything */
 function remove_menus () {
 	global $menu;
