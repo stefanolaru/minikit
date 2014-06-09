@@ -87,7 +87,14 @@ class minikit_image_widget extends WP_Widget {
 		global $_wp_additional_image_sizes;
 
 		// Set up some default widget settings
-		$defaults = array();
+		$defaults = array(
+			'title' => 'Image Title',
+			'image_id' => 0,
+			'image_size' => 'full',
+			'link' => '',
+			'link_text' => '',
+			'hide_title' => false
+		);
 
 		$instance = wp_parse_args((array) $instance, $defaults);
 		?>
