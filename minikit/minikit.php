@@ -291,7 +291,13 @@ class MinikitContact {
 	function send_email() {
 		if(!$this->is_spam) {
 			$content = "From: ".$_POST['mk-name']."\r\nEmail: ".$_POST['mk-email']."\r\n\r\n".$_POST['mk-message'];
-			$headers = 'From: ' . $_POST['mk-name'] . ' <' . $_POST['mk-email'] . '>' . "\r\n" . 'Reply-To: ' . $_POST['mk-email'];
+			$headers = 'From: ' . $_POST['mk-name'] . ' <' . $_POST['mk-email'] . '>' . "\r\n" . 'Reply-To: ' . $_POST['mk-email']."\r\n";
+			if(!empty($this->atts['cc'])) {
+				$headers .= 'Cc: '.$this->atts['cc']."\r\n";
+			}
+			if(!empty($this->atts['bcc'])) {
+				$headers .= 'Bcc: '.$this->atts['bcc']."\r\n";
+			}
 			// send email
 			mail($this->to, $this->subject, $content, $headers);
 		}
