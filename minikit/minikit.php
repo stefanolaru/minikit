@@ -30,10 +30,12 @@ function init_minikit() {
 	// cleaning up excerpt
 	add_filter('excerpt_more', 'minikit_excerpt_more');
 	
+	// clean unuseful widgets
+	add_action('widgets_init', 'minikit_unregister_default_widgets');
+	
 }
 
 function minikit_head_cleanup() {
-	global $wp_widget_factory; 
 	// EditURI link
 	remove_action( 'wp_head', 'rsd_link' );
 	// windows live writer
@@ -48,12 +50,27 @@ function minikit_head_cleanup() {
 	remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0 );
 	// WP version
 	remove_action( 'wp_head', 'wp_generator');
-	// remove recent comments style
-	remove_action( 'wp_head', array( $wp_widget_factory->widgets['WP_Widget_Recent_Comments'], 'recent_comments_style' ) );
 	// remove WP version from css
 	add_filter('style_loader_src', 'minikit_remove_wp_ver_css_js', 9999);
 	// remove Wp version from scripts
 	add_filter('script_loader_src', 'minikit_remove_wp_ver_css_js', 9999);
+}
+
+function minikit_unregister_default_widgets() {
+	global $wp_widget_factory;
+	unregister_widget('WP_Widget_Pages');
+    unregister_widget('WP_Widget_Calendar');
+    unregister_widget('WP_Widget_Archives');
+    unregister_widget('WP_Widget_Links');
+    unregister_widget('WP_Widget_Meta');
+    unregister_widget('WP_Widget_Categories');
+    unregister_widget('WP_Widget_Recent_Posts');
+    unregister_widget('WP_Widget_RSS');
+    unregister_widget('WP_Widget_Tag_Cloud');
+     
+    // remove recent comments style & widget
+    remove_action( 'wp_head', array( $wp_widget_factory->widgets['WP_Widget_Recent_Comments'], 'recent_comments_style' ));
+    unregister_widget('WP_Widget_Recent_Comments');
 }
 
 // remove WP version from RSS
