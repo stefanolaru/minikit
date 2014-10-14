@@ -11,6 +11,19 @@ function debug($s) {
 	echo '<pre>'.print_r($s,true).'</pre>';
 }
 
+// get excerpt from content
+function get_excerpt_from_content($content, $limit = 20) {
+	$excerpt = explode(' ', strip_tags($content), $limit);
+	if (count($excerpt)>=$limit) {
+		array_pop($excerpt);
+		$excerpt = implode(" ",$excerpt).' &hellip;';
+	} else {
+		$excerpt = implode(" ",$excerpt);
+	} 
+	$excerpt = preg_replace('`\[[^\]]*\]`','',$excerpt);
+	return $excerpt;
+}
+
 // fire initial functions
 add_action('after_setup_theme','init_minikit', 15);
 
