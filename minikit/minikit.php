@@ -4,7 +4,6 @@
  * Inspired by Bones https://github.com/eddiemachado/bones
  * - www.stefanolaru.com -
  */
-session_start(); 
 
 // debug function
 function debug($s) {
@@ -28,6 +27,11 @@ function get_excerpt_from_content($content, $limit = 20) {
 add_action('after_setup_theme','init_minikit', 15);
 
 function init_minikit() {
+	// start session
+	if (!session_id()) {
+		session_start();
+	}
+	
 	// launching operation cleanup
 	add_action('init', 'minikit_head_cleanup');
 	
