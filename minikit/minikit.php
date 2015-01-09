@@ -294,7 +294,7 @@ class MinikitContact {
 		$this->subject = !empty($this->atts['subject'])?$this->atts['subject']:'Message from '.get_option('blogname');
 		
 		// fill success url
-		$this->success = !empty($this->atts['success'])?$this->atts['success']:currentURL();
+		$this->success = !empty($this->atts['success'])?$this->atts['success']:$_SERVER['SCRIPT_URI'];
 		
 		// send email
 		$this->send_email();
@@ -321,7 +321,11 @@ class MinikitContact {
 	
 	function send_email() {
 		if(!$this->is_spam) {
-			$content = "From: ".$_POST['mk-name']."\r\nEmail: ".$_POST['mk-email']."\r\n\r\n".$_POST['mk-message'];
+			$content = "From: ".$_POST['mk-name']."\r\nEmail: ".$_POST['mk-email'];
+			if(!empty($_POST['mk-phone'])) {
+				$content .= "\r\nPhone: ".$_POST['mk-phone'];
+			}
+			$content .= "\r\n\r\n".$_POST['mk-message'];
 			$headers = 'From: ' . $_POST['mk-name'] . ' <' . $_POST['mk-email'] . '>' . "\r\n" . 'Reply-To: ' . $_POST['mk-email']."\r\n";
 			if(!empty($this->atts['cc'])) {
 				$headers .= 'Cc: '.$this->atts['cc']."\r\n";
