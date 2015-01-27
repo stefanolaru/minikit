@@ -2,7 +2,7 @@ var j = jQuery.noConflict();
 
 jQuery(document).ready(function ($) {
 
-    $('.select_minikit_image').on('click', function (e) {
+    $(document).on('click', '.select_minikit_image', function (e) {
 
         var self = this;
         var p = $(this).closest('.widget');
