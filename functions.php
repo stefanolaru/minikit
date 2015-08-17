@@ -46,6 +46,7 @@ add_action('admin_menu', 'remove_menus');
 
 /* register sidebars */
 register_sidebar(array(
+	'id' => 'sidebar',
 	'name' => 'Sidebar',
 	'before_widget' => '<div id="%1$s" class="widget %2$s">',
 	'after_widget' => '</div>',
