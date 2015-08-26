@@ -7,7 +7,7 @@ require_once('inc/contact_form.php');
 
 class MinikitTheme extends Minikit {
 
-	public $jquery_ver = '1.9.1';
+	public $jquery_ver = '1.11.3';
 	
 	function __construct() {
 		
@@ -81,7 +81,7 @@ class MinikitTheme extends Minikit {
 		if(!is_admin()) {
 			
 			// register jquery, modernizr & main.js
-			wp_register_script('modernizr', THEME_URI. '/js/vendor/modernizr-2.6.2.min.js', array(), null, false);
+			wp_register_script('modernizr', THEME_URI. '/js/vendor/modernizr.js', array(), null, false);
 			wp_register_script('main', THEME_URI. '/js/main.js', array('jquery'), null, true);
 	
 			// enque scripts		
