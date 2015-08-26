@@ -1,31 +1,29 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<?php
+/**
+ * The header for our theme.
+ *
+ * @package Minikit
+ */
+
+?><!DOCTYPE html>
+<html <?php language_attributes(); ?>>
 	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<title>
-			<?php 
-					wp_title(' | ' . get_bloginfo('name'), true, 'right');
-			        if (is_home() || is_front_page()) {
-			        	echo get_bloginfo('name');
-			        }
-			?>
-		</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        
+		<meta charset="<?php bloginfo( 'charset' ); ?>">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="profile" href="http://gmpg.org/xfn/11">
 		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">	
-			
 		<?php wp_head(); ?>
 	</head>
+	
 	<body <?php body_class(); ?>>
 	
 		<!--HEADER-->
-		<header>
+		<header class="site-header" role="banner">
 			
+			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" id="logo" rel="home"><?php bloginfo( 'name' ); ?></a>
+			
+			<nav id="navigation" class="main-navigation" role="navigation">
+				<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false ) ); ?>
+			</nav><!-- #navigation -->
 		</header>
 		
-		<!--MAIN-->
-		<div id="main" role="main">
