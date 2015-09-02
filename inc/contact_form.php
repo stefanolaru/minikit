@@ -14,7 +14,11 @@ class MinikitContact extends Minikit {
 	public $atts = array();
 	
 	function __construct() {
-			
+		add_action('init', array($this, 'init_minikit_contact'));
+	}
+	
+	function init_minikit_contact() {
+	
 		// populate encryption_key with admin email
 		$this->encryption_key = get_option('admin_email');
 		
@@ -26,6 +30,7 @@ class MinikitContact extends Minikit {
 			// maybe submit contact form
 			$this->maybe_submit();
 		}
+			
 	}
 	
 	function validate() {
