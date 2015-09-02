@@ -8,6 +8,7 @@ class MinikitContact extends Minikit {
 	public $nonce_fail = false;
 	public $encryption_key = '';
 	public $to;
+	public $from;
 	public $subject;
 	public $success;
 	public $atts = array();
@@ -82,6 +83,9 @@ class MinikitContact extends Minikit {
 		// fill recipient with admin email if no email provided
 		$this->to = !empty($this->atts['to'])?$this->atts['to']:get_option('admin_email');
 		
+		// fill from email with att if provided
+		$this->from = !empty($this->atts['from'])?$this->atts['from']:'no-reply@'.ltrim($_SERVER['HTTP_HOST'], 'www.');
+		
 		// fill subject with default message
 		$this->subject = !empty($this->atts['subject'])?$this->atts['subject']:'Message from '.get_option('blogname');
 		
@@ -118,10 +122,8 @@ class MinikitContact extends Minikit {
 		
 		$content .= "\r\n\r\n".$_POST['mk-message'];
 		
-		$domain_no_www = ltrim($_SERVER['HTTP_HOST'], 'www.');
-		
 		// generate headers
-		$headers = 'From: '.$_POST['mk-name'].' <no-reply@' . $domain_no_www .'>'."\r\nReply-To: " . $_POST['mk-email']."\r\n";
+		$headers = 'From: '.$_POST['mk-name'].' <'.$this->from.'>'."\r\nReply-To: " . $_POST['mk-email']."\r\n";
 					
 		if(!empty($this->atts['cc'])) {
 			$headers .= 'Cc: '.$this->atts['cc']."\r\n";
@@ -131,7 +133,7 @@ class MinikitContact extends Minikit {
 		}
 		
 		// send email
-		mail($this->to, $this->subject, $content, $headers);
+		wp_mail($this->to, $this->subject, $content, $headers);
 		
 	}
 	
