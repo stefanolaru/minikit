@@ -10,6 +10,9 @@ class MinikitShortcodes extends Minikit {
 		// foundation row
 		add_shortcode('row', array($this, 'row'));
 		
+		// add url shortcode, to be used in content area to retrieve site_url()
+		add_shortcode('url', array($this, 'get_url'));
+		
 	}
 	
 	function column($atts,$content=null) {
@@ -38,6 +41,10 @@ class MinikitShortcodes extends Minikit {
 		$html .= do_shortcode($content);
 		$html .= '</div>';
 		return $html;
+	}
+	
+	function get_url() {
+		return site_url();
 	}
 	
 }
