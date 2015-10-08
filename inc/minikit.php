@@ -231,21 +231,6 @@ class Minikit {
 		$wpdb->query("UPDATE ".$wpdb->postmeta." SET `meta_value`=REPLACE(`meta_value`,'".$old_url."','".$new_url."')");
 	}
 	
-	// get excerpt from content
-	function excerpt_from_content($content, $limit = 20) {
-		$excerpt = explode(' ', strip_tags($content), $limit);
-		if (count($excerpt)>=$limit) {
-			array_pop($excerpt);
-			$excerpt = implode(" ",$excerpt).' &hellip;';
-		} else {
-			$excerpt = implode(" ",$excerpt);
-		} 
-		$excerpt = preg_replace('`\[[^\]]*\]`','',$excerpt);
-		return $excerpt;
-	}
-	
-	
-	
 }
 
 // debug function
@@ -254,6 +239,19 @@ function debug($s, $die = false) {
 	echo '<pre>'.print_r($s,true).'</pre>';
 	// die
 	if($die) die();
+}
+
+// get excerpt from content
+function excerpt_from_content($content, $limit = 20) {
+	$excerpt = explode(' ', strip_tags($content), $limit);
+	if (count($excerpt)>=$limit) {
+		array_pop($excerpt);
+		$excerpt = implode(" ",$excerpt).' &hellip;';
+	} else {
+		$excerpt = implode(" ",$excerpt);
+	} 
+	$excerpt = preg_replace('`\[[^\]]*\]`','',$excerpt);
+	return $excerpt;
 }
 
 /* Admin Customizer */
