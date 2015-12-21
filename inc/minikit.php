@@ -102,6 +102,7 @@ class Minikit {
 		remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
 		remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
 		remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+		add_filter( 'tiny_mce_plugins', array($this, 'disable_emojis_tinymce'));
 		
 	}
 	
@@ -144,6 +145,14 @@ class Minikit {
 	    // remove recent comments style & widget
 	    remove_action( 'wp_head', array( $wp_widget_factory->widgets['WP_Widget_Recent_Comments'], 'recent_comments_style' ));
 	    unregister_widget('WP_Widget_Recent_Comments');
+	}
+	
+	function disable_emojis_tinymce( $plugins ) {
+		if ( is_array( $plugins ) ) {
+			return array_diff( $plugins, array( 'wpemoji' ) );
+		} else {
+			return array();
+		}
 	}
 	
 	function login_logo() {
