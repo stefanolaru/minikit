@@ -13,6 +13,6 @@
         }
     ],
     "require": {
-        "foundation-sites": "^6"
+        "zurb/foundation": "^6.4.3"
     }
 }
