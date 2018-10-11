@@ -10,6 +10,6 @@
         }
     ],
     "require": {
-        "stefanolaru/minikit": "v-2.0"
+        "foundation-sites": "^6.4.3"
     }
 }
