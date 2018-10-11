@@ -183,7 +183,7 @@ class Minikit {
 			    body.login div#login h1 a {
 			        background-image: url('.$logo_url.');
 			        padding-bottom: 0;
-			        background-size: auto;
+			        background-size: contain;
 			        width: auto;
 			    }
 			</style>';
