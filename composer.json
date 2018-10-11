@@ -12,6 +12,8 @@
         }
     ],
     "require": {
+    	"php": ">=5.4",
+    	"stefanolaru/minikit": "v-2.0",
         "foundation-sites": "^6"
     }
 }
