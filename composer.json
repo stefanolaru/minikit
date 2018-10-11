@@ -3,6 +3,7 @@
     "description": "Lightweight WP theme starting kit containing basic structure, functions and some goodies",
     "keywords": ["wordpress"],
     "license": "MIT",
+    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Stefan Olaru",
@@ -10,6 +11,6 @@
         }
     ],
     "require": {
-        "foundation-sites": "^6.4.3"
+        "foundation-sites": "^6"
     }
 }
