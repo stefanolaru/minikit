@@ -5,6 +5,7 @@
     "keywords": ["wordpress", "theme"],
     "type": "wordpress-theme",
     "license": "MIT",
+    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Stefan Olaru",
