@@ -1,7 +1,8 @@
-@import 'settings';
-@import 'mixins';
-@import '../bower_components/foundation-sites/scss/foundation';
+@import '../vendor/stefanolaru/scss-goodies/mixins';
+@import '../vendor/zurb/foundation/scss/foundation';
 
+
+/* @group FOUNDATION */
 @include foundation-global-styles;
 @include foundation-xy-grid-classes;
 
@@ -11,17 +12,28 @@
 @include foundation-visibility-classes;
 @include foundation-float-classes;
 @include foundation-flex-classes
+/* @end */
 
-$orange:#f15922;
-$purple:#52256e;
-$black:#231f20;
-$gray:#58585a;
-
-$font_family_1:'Gotham SSm A';
-$font_family_2:'Gotham SSm B';
+/* @group WORDPRESS */
+.alignleft {
+	float: left;
+	margin: 0 1rem 1rem 0;
+}
+.alignright {
+	float: right;
+	margin: 0 0 1rem 1rem;
+}
+.aligncenter {
+	display: block;
+	margin: .5rem auto;
+}
+.alignnone {
+	margin: 0 1rem 1rem 0;
+}
+/* @end */
 
 /* @group GLOBAL */
 body {
-	font-family: $font_family_1, $font_family_2, Helvetica, Arial, sans-serif;
+
 }
 /* @end */
