@@ -1,6 +1,6 @@
 {
   "name": "Minikit",
-  "version": "1.0.0",
+  "version": "2.0",
   "description": "Lightweight WP theme starting kit containing basic structure, functions and some goodies",
   "main": "index.php",
   "repository": "https://github.com/stefanolaru/minikit.git",
