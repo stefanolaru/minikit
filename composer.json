@@ -8,7 +8,7 @@
             "name": "Stefan Olaru",
             "email": "contact@stefanolaru.com"
         }
-    ]
+    ],
     "require": {
         "stefanolaru/minikit": "v-2.0"
     }
