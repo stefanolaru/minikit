@@ -1,5 +1,12 @@
 {
-    "require": {
-        "stefanolaru/minikit": "v-2.0"
-    }
+    "name": "stefanolaru/minikit",
+    "description": "Lightweight WP theme starting kit containing basic structure, functions and some goodies",
+    "keywords": ["wordpress"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Stefan Olaru",
+            "email": "contact@stefanolaru.com"
+        }
+    ]
 }
