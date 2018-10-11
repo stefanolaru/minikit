@@ -1,7 +1,7 @@
 {
     "name": "stefanolaru/minikit",
     "description": "Lightweight WP theme starting kit containing basic structure, functions and some goodies",
-    "version": "2.0",
+    "version": "2.1",
     "keywords": ["wordpress", "theme"],
     "type": "wordpress-theme",
     "license": "MIT",
@@ -13,6 +13,7 @@
         }
     ],
     "require": {
-        "zurb/foundation": "^6.4.3"
+    	"stefanolaru/scss-goodies": "*",
+        "zurb/foundation": "^6.4"
     }
 }
