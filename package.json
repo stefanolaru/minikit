@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": null,
   "dependencies": {
-    "minikit": "https://github.com/stefanolaru/minikit"
+    "minikit": "https://github.com/stefanolaru/minikit",
     "foundation-sites": "^6.5.0-rc.3",
     "scss-goodies": "https://github.com/stefanolaru/scss-goodies"
   }
