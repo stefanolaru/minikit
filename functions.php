@@ -82,7 +82,7 @@ class MinikitTheme extends Minikit {
 			
 			// register jquery, modernizr & main.js
 			wp_register_script('modernizr', THEME_URI. '/js/vendor/modernizr.js', array(), null, false);
-			wp_register_script('main', THEME_URI. '/js/main.js', array('jquery'), null, true);
+			wp_register_script('main', $this->get_versioned_file('/js/main.js'), array('jquery'), null, true);
 	
 			// enque scripts		
 			wp_enqueue_script('modernizr');
@@ -96,13 +96,40 @@ class MinikitTheme extends Minikit {
 			// register normalize css and main css
 			wp_register_style('normalize', get_template_directory_uri().'/css/normalize.css', array(), '', 'all');
 			wp_register_style('foundation', get_template_directory_uri().'/css/foundation.min.css', array('normalize'), '', 'all');
-			wp_register_style('style', get_template_directory_uri().'/css/style.css', array(), '', 'all');
+			wp_register_style('style', $this->get_versioned_file('/css/style.css'), array(), '', 'all');
 			
 			// enque styles
 			wp_enqueue_style('normalize');
 			wp_enqueue_style('foundation');
 			wp_enqueue_style('style');
 		}
+	}
+
+	function get_versioned_file($path) {
+
+		/*
+		Add the following line in .htaccess
+		
+		# rewrite rule for versioned css/js
+		RewriteRule ^(.*)/(css|js)/(.*).([0-9]{12}).(css|js)$ /$1/$2/$3.$5 [L,NC]
+		
+		*/
+
+		// get URI
+		$uri = THEME_DIR . $path;
+		if (file_exists($uri)) {
+
+			// get pathinfo
+			$pi = pathinfo($path);
+
+			// get timestamp
+			$timestamp = date('ymdHis',filemtime($uri));
+
+			// set new versioned path
+			$path = $pi['dirname'].'/'.$pi['filename'].'.'.$timestamp.'.'.$pi['extension'];
+		}
+
+		return THEME_URI.$path;
 	}
 	
 	function remove_admin_menus() {
