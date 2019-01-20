@@ -1,0 +1,14 @@
+{
+  "name": "Minikit",
+  "version": "2.0",
+  "description": "Lightweight WP theme starting kit containing basic structure, functions and some goodies",
+  "main": "index.php",
+  "repository": "https://github.com/stefanolaru/minikit.git",
+  "author": "Stefan Olaru <contact@stefanolaru.com>",
+  "license": "MIT",
+  "private": null,
+  "dependencies": {
+    "foundation-sites": "^6.5.0-rc.3",
+    "scss-goodies": "https://github.com/stefanolaru/scss-goodies"
+  }
+}

@@ -1,0 +1,39 @@
+@import '../node_modules/scss-goodies/scss-goodies/mixins';
+@import '../node_modules/foundation-sites/scss/foundation';
+
+
+/* @group FOUNDATION */
+@include foundation-global-styles;
+@include foundation-xy-grid-classes;
+
+@include foundation-typography;
+@include foundation-forms;
+@include foundation-button;
+@include foundation-visibility-classes;
+@include foundation-float-classes;
+@include foundation-flex-classes
+/* @end */
+
+/* @group WORDPRESS */
+.alignleft {
+	float: left;
+	margin: 0 1rem 1rem 0;
+}
+.alignright {
+	float: right;
+	margin: 0 0 1rem 1rem;
+}
+.aligncenter {
+	display: block;
+	margin: .5rem auto;
+}
+.alignnone {
+	margin: 0 1rem 1rem 0;
+}
+/* @end */
+
+/* @group GLOBAL */
+body {
+
+}
+/* @end */
