@@ -65,7 +65,7 @@ class MinikitTheme extends Minikit {
 			// deregister wp jquery first
 			wp_deregister_script('jquery');
 			// register new script
-			wp_register_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/'.$this->jquery_ver.'/jquery.min.js', array(), null, true);
+			wp_register_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/'.$this->jquery_ver.'/jquery.min.js', array(), null, true);
 			// enqueue script
 			wp_enqueue_script('jquery');
 		}
