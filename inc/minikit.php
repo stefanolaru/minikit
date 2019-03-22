@@ -103,6 +103,15 @@ class Minikit {
 		remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
 		remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
 		add_filter( 'tiny_mce_plugins', array($this, 'disable_emojis_tinymce'));
+
+		// Remove oEmbed discovery links.
+		remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+		// Remove oEmbed-specific JavaScript from the front-end
+		remove_action( 'wp_head', 'wp_oembed_add_host_js' );
+		// Remove the REST API endpoint.
+		remove_action( 'rest_api_init', 'wp_oembed_register_route' );
+		// Remove filter of the oEmbed result before any HTTP requests are made.
+		remove_filter( 'pre_oembed_result', 'wp_filter_pre_oembed_result', 10 );
 		
 	}
 	
