@@ -209,11 +209,11 @@ class MinikitContact extends Minikit {
 	}
 	
 	function encrypt($string, $key) {
-		return $this->safe_b64encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($key), $string, MCRYPT_MODE_CBC, md5(md5($key))));
+		return $this->safe_b64encode(openssl_encrypt($string, 'AES-128-CBC', $key));
 	}
 	
 	function decrypt($string, $key) {
-		return rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($key), $this->safe_b64decode($string), MCRYPT_MODE_CBC, md5(md5($key))), "\0");
+		return rtrim(openssl_decrypt($this->safe_b64decode($string), 'AES-128-CBC', $key), "\0");
 	}
 	
 }
