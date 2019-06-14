@@ -212,6 +212,7 @@ class MinikitContact extends Minikit {
 	function encrypt($string, $key) {
 		$ivlen = openssl_cipher_iv_length($this->cipher);
 		$_SESSION['openssl_iv'] = openssl_random_pseudo_bytes($ivlen);
+		return $this->safe_b64encode(openssl_encrypt($string, $this->cipher, $key, 0, $_SESSION['openssl_iv']));
 	}
 	
 	function decrypt($string, $key) {
