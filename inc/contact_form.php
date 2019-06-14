@@ -7,6 +7,7 @@ class MinikitContact extends Minikit {
 	public $nonce = 'MiniKitCF';
 	public $nonce_fail = false;
 	public $encryption_key = '';
+	public $cipher = 'AES-128-CBC';
 	public $to;
 	public $from;
 	public $subject;
@@ -209,11 +210,12 @@ class MinikitContact extends Minikit {
 	}
 	
 	function encrypt($string, $key) {
-		return $this->safe_b64encode(openssl_encrypt($string, 'AES-128-CBC', $key));
+		$ivlen = openssl_cipher_iv_length($this->cipher);
+		$_SESSION['openssl_iv'] = openssl_random_pseudo_bytes($ivlen);
 	}
 	
 	function decrypt($string, $key) {
-		return rtrim(openssl_decrypt($this->safe_b64decode($string), 'AES-128-CBC', $key), "\0");
+		return rtrim(openssl_decrypt($this->safe_b64decode($string), $this->cipher, $key, 0, $_SESSION['openssl_iv']), "\0");
 	}
 	
 }
