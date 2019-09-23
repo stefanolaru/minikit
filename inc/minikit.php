@@ -173,7 +173,7 @@ class Minikit {
 		add_filter('login_headerurl', array($this, 'login_logo_url'));
 		
 		// change login logo title
-		add_filter('login_headertitle', array($this, 'login_logo_title'));
+		add_filter('login_headertext', array($this, 'login_logo_title'));
 		
 	}
 	
